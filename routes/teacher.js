@@ -1,9 +1,12 @@
 const express = require('express')
 
 const TEACHERS = require('../mock/teacher');
-const res = require('express/lib/response');
+const requireApiKey = require('../middlewares/requireApiKey')
+const logRequestMethod = require('../middlewares/logRequestMethod')
 
 const teacherRouter = express.Router();
+
+teacherRouter.use(requireApiKey)
 
 teacherRouter.get('/', (req,res) => {
     const {from, to} = req.query
@@ -16,7 +19,7 @@ teacherRouter.get('/', (req,res) => {
 }
 })
 
-teacherRouter.get('/:id', (res,req) => {
+teacherRouter.get('/:id', logRequestMethod, (res,req) => {
     const findTeacher = TEACHERS[req.params.id]
     res.send(findTeacher)
 })
