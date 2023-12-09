@@ -7,4 +7,4 @@ const requireApiKey = (req,res,next) => {
     }
 }
 
-module.exports = requireApiKey
+module.exports = requireApiKey;

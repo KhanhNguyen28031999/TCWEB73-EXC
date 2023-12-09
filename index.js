@@ -1,19 +1,17 @@
 // Import intension
-const {createNewFile, readFile} = require('./fileSystem')
-const logRequestTime = require('./middlewares/logRequestTime')
+
+const logRequestTime = require("./middlewares/logRequestTime");
+const teacherRouter = require("./routes/teacher");
 // Import Extension
-const express = require('express');
-const app = express.Router();
+const express = require("express");
+const app = express();
 
 const port = 3001;
 
-app.use(logRequestTime)
+app.use(logRequestTime);
 
-app.get('/', (req, res) => {
-    res.send("Hello, this is homepage")
-  })
+app.use("/teachers", teacherRouter);
 
-
-  app.listen(3001, () => {
-    console.log("App listening on: ", `${port}`)
-  })
+app.listen(port, () => {
+  console.log(`This is port : ${port}`);
+});
